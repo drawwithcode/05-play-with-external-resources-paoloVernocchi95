@@ -5,6 +5,8 @@ function preload(){
   sound = loadSound('assets/Piano Music - Paradise - Sad Instrument Piano.mp3');
    myFont = loadFont('assets/Maddison.ttf');
   corpo  = loadImage('assets/corpo.png');
+    bracciosotto  = loadImage('assets/braccio-sotto.png');
+      bracciosopra  = loadImage('assets/braccio sopra.png');
 }
 
 function setup(){
@@ -21,7 +23,10 @@ function draw(){
   textFont(myFont);
  textSize(windowWidth/15);
   text('Piano Piano',windowWidth*4/6,windowHeight/5*2);
-  image(corpo, windowWidth/4,windowHeight/6,corpo.width/10, corpo.height/10);
+  angleMode(DEGREES);
+
+
+
   var w=windowWidth/50;
 
   var spectrum = fft.analyze();
@@ -43,6 +48,7 @@ function draw(){
 
   //rect(i*w,windowHeight/2,w,windowHeight);
     rect(i*w,y,w,windowHeight-y);
+
   // tasti neri
   if (y>windowHeight/2) {
     fill(0);
@@ -89,6 +95,25 @@ function draw(){
   rect(s+47*w,windowHeight/2,w*4/6,windowHeight/4);*/
 
   }
+  for (var j = 0; j< spectrum.length; j+=50){
+    var rot = spectrum[j];
+    var ang = map(rot,0,256,0,100);
+  r=-50;
+  console.log(amp);
+  push();
+  translate(windowWidth/4+35,windowHeight/6+80);
+  rotate(ang);
+  image(bracciosotto, 0,0,bracciosotto.width/10,bracciosotto.height/10);
+  pop();
+  image(corpo, windowWidth/4,windowHeight/6,corpo.width/10, corpo.height/10);
+  push();
+  translate(windowWidth/4+35,windowHeight/6+80);
+  rotate(ang);
+  image(bracciosopra, 0,0,bracciosopra.width/10,bracciosopra.height/10);
+  pop();
+
+
+}
 
   /*var waveform = fft.waveform();
   noFill();
@@ -103,6 +128,7 @@ function draw(){
   endShape();*/
 
   text('click to play/pause', 4, 10);
+
 }
 
 // fade sound if mouse is over canvas
