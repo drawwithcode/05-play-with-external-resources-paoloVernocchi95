@@ -3,6 +3,8 @@ var s=25;
 
 function preload(){
   sound = loadSound('assets/Piano Music - Paradise - Sad Instrument Piano.mp3');
+   myFont = loadFont('assets/Maddison.ttf');
+  corpo  = loadImage('assets/corpo.png');
 }
 
 function setup(){
@@ -10,10 +12,16 @@ function setup(){
   cnv.mouseClicked(togglePlay);
   fft = new p5.FFT();
   sound.amp(0.2);
+  textAlign(CENTER);
 }
 
 function draw(){
   background(0);
+  fill(213,169,64);
+  textFont(myFont);
+ textSize(windowWidth/15);
+  text('Piano Piano',windowWidth*4/6,windowHeight/5*2);
+  image(corpo, windowWidth/4,windowHeight/6,corpo.width/10, corpo.height/10);
   var w=windowWidth/50;
 
   var spectrum = fft.analyze();
@@ -23,14 +31,18 @@ function draw(){
     var amp = spectrum[i];
     var y = map(amp,0,256,windowHeight,0);
   //line(i*w,windowHeight,i*w,y);
-  if (y>windowHeight/2) {
+  if (y>windowHeight/2 && y<windowHeight/4*3) {//premuti a metà
+    fill(225);
+  }
+  else if ( y>windowHeight/4*3){//non premuti
     fill(255);
   }
-  else {
-    fill(0,255,0);
+  else {// premuti
+    fill(200);
   }
-  //rect(i*w,y,w,windowHeight-y);
-  rect(i*w,windowHeight/2,w,windowHeight);
+
+  //rect(i*w,windowHeight/2,w,windowHeight);
+    rect(i*w,y,w,windowHeight-y);
   // tasti neri
   if (y>windowHeight/2) {
     fill(0);
@@ -38,7 +50,8 @@ function draw(){
   else {
     fill(50);
   }
-  //tasti neri 
+  //tasti neri
+  /*
   rect(s,windowHeight/2,w*4/6,windowHeight/4);
   rect(s+w,windowHeight/2,w*4/6,windowHeight/4);
   rect(s+3*w,windowHeight/2,w*4/6,windowHeight/4);
@@ -73,7 +86,7 @@ function draw(){
   rect(s+43*w,windowHeight/2,w*4/6,windowHeight/4);
   rect(s+45*w,windowHeight/2,w*4/6,windowHeight/4);
   rect(s+46*w,windowHeight/2,w*4/6,windowHeight/4);
-  rect(s+47*w,windowHeight/2,w*4/6,windowHeight/4);
+  rect(s+47*w,windowHeight/2,w*4/6,windowHeight/4);*/
 
   }
 
