@@ -22,7 +22,7 @@ function draw() {
   fill(213, 169, 64);
   textFont(myFont);
   textSize(windowWidth / 15);
-  text('Piano Piano', windowWidth * 4 / 6, windowHeight / 5 * 2);
+  text('Piano Piano', windowWidth * 5 / 6, windowHeight / 5 * 1);
   angleMode(DEGREES);
 
 
